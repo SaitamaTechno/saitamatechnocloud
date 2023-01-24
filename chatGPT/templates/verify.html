@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Verification</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Verification</h2>
+		<div>We sent you an e-mail,</div>
+		<div>please check and enter your code below.</div>
+        <form method="post">
+            <div>
+                <label for="code">Code:</label>
+                <input type="text" id="code" name="code" required>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

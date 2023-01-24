@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Login Saitama Techno Cloud</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="form-container">
+		<h2>Saitama Techno Cloud</h2>
+        <form method="post">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <input type="submit" value="Log In">
+			<button type="button" onclick="location.href='/register'">Sign Up Now!</button>
+        </form>
+    </div>
+</body>
+</html>

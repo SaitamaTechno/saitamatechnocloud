@@ -1,0 +1,78 @@
+/* center the elements vertically */
+.header{
+    background-image: url("images/saitamatechno.ico");
+}
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    flex-direction: column;
+	background-color: black;
+	background-image: url("images/saitamatechno.png"); /* replace with the path to your image */
+    /*background-size: cover;*/ /* scale the image to cover the entire background */
+    background-repeat: no-repeat;
+	background-position: left center; /* position the image in the center of the element */
+    background-attachment: fixed;
+}
+
+/* set text color to red */
+body, label {
+    color: red;
+    font-size: 25px;
+    font-weight: bold; /* added */
+}
+label {
+    float: left; /* added */
+	clear: both;	    /* added */
+	background-color: black;
+}
+/* set input field background color to yellow */
+input[type="text"], input[type="password"], input[type="email"] {
+    background-color: yellow;
+    font-size: 25px;
+	color: blue;
+    margin-top: 2px;
+	margin-bottom: 10px;
+	float: left; /* added */
+	clear: both;
+}
+
+/* set submit button styles */
+input[type="submit"] {
+	margin: 0 auto;
+    font-size: 30px; /* added */
+    background-color: pink; /* added */
+    color: blue; /* added */
+    padding: 15px; /* added */
+    margin-top: 5px; /* added */
+	display: flex; /* added */
+    justify-content: center;
+	float: left; /* added */
+	clear: both;    
+}
+
+button[type="button"] {
+	margin: 0 auto;
+    font-size: 30px; /* added */
+    background-color: pink; /* added */
+    color: blue; /* added */
+    padding: 15px; /* added */
+    margin-top: 5px; /* added */
+    display: flex; /* added */
+    justify-content: center;
+	float: right;
+}
+
+/* add animation effect to button */
+input[type="submit"]:hover {
+    transform: scale(1.05); /* increase size by 5% */
+    background-color: yellow; /* change background color */
+    transition: all 0.3s ease-in-out; /* add smooth transition */
+}
+
+button[type="button"]:hover {
+    transform: scale(1.05); /* increase size by 5% */
+    background-color: yellow; /* change background color */
+    transition: all 0.3s ease-in-out; /* add smooth transition */
+}

@@ -55,6 +55,9 @@ def delete_docker(name):
 	return 1
 
 def con_run(name, command):
-	bash("docker exec -d {} {}".format(name, command))
+	bash("docker exec -it {} {}".format(name, command))
 	return 1
 
+def clone_img(con_name, new_image_name):
+	bash("docker commit {} {}".format(con_name, new_image_name))
+	return 1

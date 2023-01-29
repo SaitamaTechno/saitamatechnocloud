@@ -58,6 +58,30 @@ def con_run(name, command):
 	bash("docker exec -it {} {}".format(name, command))
 	return 1
 
-def clone_img(con_name, new_image_name):
+def con_restart(name):
+	bash("docker restart "+name)
+	con_run(name, "service ssh restart")
+	return 1
+
+def clone_img(con_name, new_image_name): # clone image from stopped container
 	bash("docker commit {} {}".format(con_name, new_image_name))
+	return 1
+
+######## New Functions #########
+
+def printall():
+	docker_names = get_names()
+	docker_sizes = get_sizes()
+	docker_ports = get_ports1()
+
+	for i in range(len(docker_names)):
+	        print(docker_names[i], docker_sizes[i])
+	for i in docker_ports:
+	        print(i)
+
+def create_root(name, password, hostports, conports):
+	create_docker(name, "stc:latest", hostports, conports)
+	con_run(name, "expect /e1.expect {}".format(password))
+	con_run(name, "rm /e1.expect /stc1.sh")
+	con_run(name, "service ssh restart")
 	return 1

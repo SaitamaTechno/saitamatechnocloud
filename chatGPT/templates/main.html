@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Saitama Techno Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='mainstyles.css')}}">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Saitama Techno Cloud</h1>
+        <div>Username: {{ username }}</div>
+        <div>Dogecoin Wallet: {{ dogecoin_address }}</div>
+        <div>Money: {{ dogecoin }} Doge</div>
+        <form method="post">
+            <input type="submit" name="submit_button" value="Reboot">
+            <input type="submit" name="submit_button" value="Send Dogecoin">
+            <input type="submit" name="submit_button" value="Log Out">
+        </form>
+    </div>
+    <div>{{ reboot_text }}</div>
+</body>
+</html>

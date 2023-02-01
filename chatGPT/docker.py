@@ -1,4 +1,5 @@
 import subprocess
+import random
 
 def bash(command):
 	cmdlist = command.split(" ")
@@ -6,8 +7,20 @@ def bash(command):
 	output = output.stdout.decode("utf-8")
 	return output
 
+def get_open_ports():
+	outlist = bash("lsof -i -P -n").split("\n")
+	newlist = []
+	for i in outlist:
+		if "(LISTEN)" in i:
+			n1 = i.find(":")
+			n2 = i.find(" (LISTEN)")
+			i = i[n1+1:n2]
+			newlist.append(int(i))
+	return newlist
+
 def get_names():
 	docker_names = bash('docker ps --format "{{.Names}}"').replace('"', '').split('\n')
+	docker_names.pop(-1)
 	return docker_names
 
 def get_sizes():
@@ -42,7 +55,7 @@ def get_ports1(): #Get all published ports
 
 def create_docker(name, image, hostports, conports):
 	mystr0="docker run"
-	mystr1=" --name {} -d -i -t {} /bin/sh"
+	mystr1=" --name {} -d -i -t --cpus=.1 --memory=128m {} /bin/sh"
 	newstr=""
 	for i in range(len(hostports)):
 		newstr+=" -p {}:{}".format(hostports[i], conports[i])
@@ -79,9 +92,21 @@ def printall():
 	for i in docker_ports:
 	        print(i)
 
-def create_root(name, password, hostports, conports):
+def create_root(name, password):
+	while 1:
+		a = random.randint(1024, 65535)
+		if a not in get_open_ports():
+			hostports = [a]
+			conports = [22]
+			break
+	while len(hostports) < 10:
+		a = random.randint(1024, 65535)
+		if a not in get_open_ports():
+			hostports.append(a)
+			conports.append(a)
+
 	create_docker(name, "stc:latest", hostports, conports)
 	con_run(name, "expect /e1.expect {}".format(password))
 	con_run(name, "rm /e1.expect /stc1.sh")
 	con_run(name, "service ssh restart")
-	return 1
+	return hostports

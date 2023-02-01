@@ -18,11 +18,15 @@ body {
 
 /* set text color to red */
 body, label {
-    color: red;
+    color: yellow;
     font-size: 25px;
     font-weight: bold; /* added */
 }
-
+h1{
+    color: red;
+    font-size: 40px;
+    font-weight: bold;
+}
 label {
     float: left; /* added */
 	clear: both;	    /* added */

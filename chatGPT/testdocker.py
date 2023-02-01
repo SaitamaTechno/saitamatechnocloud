@@ -14,6 +14,8 @@ import docker
 #docker.create_root("saitama2", "mypassword", [1001, 1002], [22, 5901])
 #docker.con_restart("saitama2")
 #docker.printall()
+#docker.con_restart("saitama1")
+#docker.printall()
+#print(docker.get_open_ports())
 
-#docker.create_root("saitama3", "mypassword", [1003], [22])
-docker.printall()
+#print(docker.create_root("saitama2", "123"))

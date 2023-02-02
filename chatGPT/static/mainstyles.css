@@ -46,10 +46,10 @@ input[type="text"], input[type="password"], input[type="email"] {
 /* set submit button styles */
 input[type="submit"] {
 	margin: 0 auto;
-    font-size: 30px; /* added */
+    font-size: 25px; /* added */
     background-color: pink; /* added */
     color: blue; /* added */
-    padding: 15px; /* added */
+    padding: 10px; /* added */
     margin-top: 5px; /* added */
 	display: flex; /* added */
     justify-content: center;
@@ -59,10 +59,10 @@ input[type="submit"] {
 
 button[type="button"] {
 	margin: 0 auto;
-    font-size: 30px; /* added */
+    font-size: 25px; /* added */
     background-color: pink; /* added */
     color: blue; /* added */
-    padding: 15px; /* added */
+    padding: 10px; /* added */
     margin-top: 5px; /* added */
     display: flex; /* added */
     justify-content: center;

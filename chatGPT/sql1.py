@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("data/userdata.db")
+con = sqlite3.connect("data/userdata.db", check_same_thread=False)
 cur = con.cursor()
 #cur.execute("CREATE TABLE register (username, password, email, verification_code, verified)")
 #res = cur.execute("SELECT name FROM sqlite_master")

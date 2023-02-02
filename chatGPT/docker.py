@@ -55,7 +55,7 @@ def get_ports1(): #Get all published ports
 
 def create_docker(name, image, hostports, conports):
 	mystr0="docker run"
-	mystr1=" --name {} -d -i -t --cpus=.1 --memory=128m {} /bin/sh"
+	mystr1=" --name {} -d -i -t --cpus=.2 --memory=256m {} /bin/sh"
 	newstr=""
 	for i in range(len(hostports)):
 		newstr+=" -p {}:{}".format(hostports[i], conports[i])

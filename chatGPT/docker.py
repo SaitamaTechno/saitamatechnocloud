@@ -76,6 +76,14 @@ def con_restart(name):
 	con_run(name, "service ssh restart")
 	return 1
 
+def restart_all():
+	for i in get_names():
+		if i == "portainer":
+			pass
+		else:
+			con_restart(i)
+	return 1
+
 def clone_img(con_name, new_image_name): # clone image from stopped container
 	bash("docker commit {} {}".format(con_name, new_image_name))
 	return 1

@@ -29,7 +29,6 @@ h1{
 }
 label {
     float: left; /* added */
-	clear: both;	    /* added */
 	background-color: black;
 }
 /* set input field background color to yellow */
@@ -56,17 +55,26 @@ input[type="submit"] {
 	float: left; /* added */
 	clear: both;    
 }
+
 input[type="radio"] {
-	margin: 0 auto;
-    font-size: 25px; /* added */
-    background-color: pink; /* added */
-    color: blue; /* added */
-    padding: 10px; /* added */
-    margin-top: 5px; /* added */
-	display: flex; /* added */
-    justify-content: center;
-	float: left; /* added */ 
-}
+    margin-top: 4px;
+    float: left; /* added */ 
+    clear: both;
+    height: 20px;
+    width: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 50%;
+    border: 2px solid red;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  input[type="radio"]:checked {
+    background-color: red;
+  }
+  
 button[type="button"] {
 	margin: 0 auto;
     font-size: 25px; /* added */

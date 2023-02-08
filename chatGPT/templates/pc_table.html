@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Saitama Techno Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='pc_table.css')}}">
+  </head>
+  <body>
+    
+    <h1>Computers Table</h1>
+        <div>Username: {{ username }}</div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>SSH Port</th>
+        <th>Available Ports</th>
+        <th>Disk Size</th>
+        <th>Doge/Month</th>
+        <th>Reboot</th>
+        <th>Delete</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>{{ name }}</td>
+        <td>{{ sshport }}</td>
+        <td>{{ availableports }}</td>
+        <td>{{ disk_size }}</td>
+        <td>{{ doge }}</td>
+        <form  method="post">
+        <td>
+          <input type="submit" name="submit_button" value="Reboot">
+        </td>
+        <td>
+          <input type="submit" name="submit_button" value="Delete">
+        </td>
+        </form>
+        <td>{{ status }}</td>
+      </tr>
+    </table>
+    <div class="form-container">
+    <button type="button" onclick="location.href='/rent_pc'">Rent a Computer</button>
+    <button type="button" onclick="location.href='/main'">Main Page</button>
+    </div>
+    <label>SSH Access: ssh root@194.233.164.233 -p {{ sshport }}</label>
+    <div>{{ msg }}</div>
+  </body>
+</html>

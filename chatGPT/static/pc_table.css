@@ -6,7 +6,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    height: 60vh;
     flex-direction: column;
 	background-color: black;
 	background-image: url("images/saitamatechno.png"); /* replace with the path to your image */
@@ -46,27 +46,15 @@ input[type="text"], input[type="password"], input[type="email"] {
 /* set submit button styles */
 input[type="submit"] {
 	margin: 0 auto;
-    font-size: 25px; /* added */
+    font-size: 20px; /* added */
     background-color: pink; /* added */
     color: blue; /* added */
-    padding: 10px; /* added */
-    margin-top: 5px; /* added */
-	display: flex; /* added */
+    padding: 7px; /* added */
+    display: flex; /* added */
     justify-content: center;
-	float: left; /* added */
-	clear: both;    
+	float: center;   
 }
-input[type="radio"] {
-	margin: 0 auto;
-    font-size: 25px; /* added */
-    background-color: pink; /* added */
-    color: blue; /* added */
-    padding: 10px; /* added */
-    margin-top: 5px; /* added */
-	display: flex; /* added */
-    justify-content: center;
-	float: left; /* added */ 
-}
+
 button[type="button"] {
 	margin: 0 auto;
     font-size: 25px; /* added */
@@ -74,6 +62,7 @@ button[type="button"] {
     color: blue; /* added */
     padding: 10px; /* added */
     margin-top: 5px; /* added */
+    margin-left: 5px;
     display: flex; /* added */
     justify-content: center;
 	float: right;

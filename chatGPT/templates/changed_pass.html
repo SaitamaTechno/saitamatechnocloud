@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Account Verified</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <div class="message">
+        <h1>Your password has been changed.</h1>
+        <label>You can now log in to your account.</label>
+    </div>
+    <button type="button" onclick="location.href='/login'">Go to Login Page</button>
+</body>
+</html>

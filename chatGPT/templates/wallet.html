@@ -5,7 +5,7 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
     <title>Saitama Techno Cloud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='mainstyles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='walletstyles.css')}}">
 </head>
 <body>
     
@@ -20,9 +20,14 @@
         <h1>Send Doge</h1>
         <form method="post">
             <div>
-                <label for="username">Send Doge to this wallet:</label>
+                <label for="doge_quantity">Doge Quantity:</label>
+                <input type="text" id="doge_quantity" name="doge_quantity" required>
+            </div>
+            <div>
+                <label for="username">Wallet Address:</label>
                 <input type="text" id="wallet" name="wallet" required>
             </div>
+            
             <input type="submit" name="submit_button" value="Send Doge">
             <button type="button" onclick="location.href='/main'">Main Page</button>
         </form>

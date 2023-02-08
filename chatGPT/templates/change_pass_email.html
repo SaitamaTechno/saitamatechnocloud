@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Saitama Techno Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+</head>
+<body>
+    <h1>Change Password</h1>
+    <div>Username: {{ username }}</div>
+    <label for="description">Do you want to send Password verification code to this email?</label>
+    <label for="email">Email address: {{ email }}</label>
+    <form method="post">
+        <input type="submit" name="submit_button" value="Yes">
+        <button type="button" onclick="location.href='/login'">No</button>
+    </form>
+    <div>{{ msg }}</div>
+    {{ but|safe }}
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <link rel="shortcut icon" href="{{ url_for('static', filename='saitamatechno.ico') }}">
+    <title>Saitama Techno Cloud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='rent_pc.css')}}">
+</head>
+<body>
+    <h1>Rent a Computer</h1>
+    <div class="form-container">
+        <form method="post">
+            <div>
+                <label for="computer_name">Computer Name:</label>
+                <input type="text" id="computer_name" name="computer_name" required>
+            </div>
+            <div>
+                <label for="password">Root Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <label for="verify_password">Verify Root Password:</label>
+                <input type="password" id="verify_password" name="verify_password" required>
+            </div>
+            <div>
+                <label for="disk_size">Choose a disk size:</label><br>
+                <input type="radio" id="1gb" name="disk_size" value="1" required>
+                <label for="1gb">1GB (2 Doge/Monthly)</label><br>
+                <input type="radio" id="2gb" name="disk_size" value="2" required>
+                <label for="2gb">2GB (4 Doge/Monthly)</label><br>
+                <input type="radio" id="4gb" name="disk_size" value="4" required>
+                <label for="4gb">4GB (8 Doge/Monthly)</label><br><br>
+            </div>
+            <input type="submit" name="submit" value="Submit">
+            <button type="button" onclick="location.href='/pc_table'">PC Table</button>
+        </form>
+        
+    </div>
+    <div>{{ msg }}</div>
+    
+</body>
+</html>

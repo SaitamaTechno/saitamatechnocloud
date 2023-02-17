@@ -11,12 +11,12 @@ import docker
 #docker.con_run("myname", "service ssh restart")
 #docker.delete_docker("saitama1")
 #docker.clone_img("python3", "stc")
-#docker.create_root("saitama2", "mypassword", [1001, 1002], [22, 5901])
 #docker.con_restart("saitama2")
 #docker.printall()
 #docker.con_restart("saitama1")
 #docker.printall()
 #print(docker.get_open_ports())
 #docker.restart_all()
-
 #print(docker.create_root("vegeta", "123"))
+
+#print(docker.get_size_from_name("enes"))

@@ -10,9 +10,10 @@
 <body>
     <div class="form-container">
         <h1>Saitama Techno Cloud</h1>
-        <div>Username: {{ username }}</div>
-        <div>Dogecoin Wallet: {{ dogecoin_address }}</div>
-        <div>Money: {{ dogecoin }} Doge</div>
+        <label>Username: {{ username }}</label>
+        <label>Dogecoin Wallet:</label>
+        <label>{{ dogecoin_address }}</label>
+        <label>Money: {{ dogecoin }} Doge</label>
         <form method="post">
             <input type="submit" name="submit_button" value="My Computers">
             <input type="submit" name="submit_button" value="My Wallet">

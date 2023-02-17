@@ -6,7 +6,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 70vh;
+    height: 80vh;
     flex-direction: column;
 	background-color: black;
 	background-image: url("images/saitamatechno.png"); /* replace with the path to your image */
@@ -86,7 +86,18 @@ button[type="button"] {
     justify-content: center;
 	float: right;
 }
-
+button[type="button1"] {
+	margin: 0 auto;
+    font-size: 25px; /* added */
+    background-color: pink; /* added */
+    color: blue; /* added */
+    padding: 10px; /* added */
+    margin-top: 5px; /* added */
+    display: flex; /* added */
+    justify-content: center;
+	float: center;
+    clear: both;
+}
 /* add animation effect to button */
 input[type="submit"]:hover {
     transform: scale(1.05); /* increase size by 5% */
@@ -99,7 +110,11 @@ button[type="button"]:hover {
     background-color: yellow; /* change background color */
     transition: all 0.3s ease-in-out; /* add smooth transition */
 }
-
+button[type="button1"]:hover {
+    transform: scale(1.05); /* increase size by 5% */
+    background-color: yellow; /* change background color */
+    transition: all 0.3s ease-in-out; /* add smooth transition */
+}
 button[type="tdbutton"] {
 	margin: 0 auto;
     font-size: 20px; /* added */

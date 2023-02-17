@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Rent a Computer</h1>
+    <label>Available Money: {{ money }}</label>
     <div class="form-container">
         <form method="post">
             <div>
@@ -32,12 +33,36 @@
                 <input type="radio" id="4gb" name="disk_size" value="4" required>
                 <label for="4gb">4GB (8 Doge/Monthly)</label><br><br>
             </div>
-            <input type="submit" name="submit" value="Submit">
+            
+            <input type="submit" name="submit" value="Pay">
             <button type="button" onclick="location.href='/pc_table'">PC Table</button>
         </form>
-        
+        <button type="button1" onclick="calculate_payment()">Calculate Transaction Fee</button>
+        <label id="calculate_payment"></label>
     </div>
-    <div>{{ msg }}</div>
-    
+    <label>{{ msg }}</label>
+    <script>
+        function calculate_payment(){
+            var transaction_fee;
+            if (true==document.querySelector("#\\31 gb").checked)
+            {
+            transaction_fee=0.02366
+             document.getElementById("calculate_payment").textContent="Transaction Fee="+(transaction_fee).toString()+" Doge"
+            }
+            else if (true==document.querySelector("#\\32 gb").checked)
+            {
+            transaction_fee=0.04366
+            document.getElementById("calculate_payment").textContent="Transaction Fee="+(transaction_fee).toString()+" Doge"
+            }
+            else if (true==document.querySelector("#\\34 gb").checked)
+            {
+            transaction_fee=0.08366
+            document.getElementById("calculate_payment").textContent="Transaction Fee="+(transaction_fee).toString()+" Doge"
+            }
+            else {
+                document.getElementById("calculate_payment").textContent="Please choose a disk size!"
+            }
+        }
+    </script>
 </body>
 </html>

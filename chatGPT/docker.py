@@ -118,3 +118,11 @@ def create_root(name, password):
 	con_run(name, "rm /e1.expect /stc1.sh")
 	con_run(name, "service ssh restart")
 	return hostports
+
+def get_size_from_name(name):
+    name_list=get_names()
+    size_list=get_sizes()
+    for i in range(len(name_list)):
+        #print(name_list[i], size_list[i])
+        if name == name_list[i]:
+            return size_list[i]

@@ -11,29 +11,58 @@
     
     <div class="form-container">
         <h1>Receive Doge</h1>
-    <div>Username: {{ username }}</div>
+    
     {{ qrcode|safe }}
-    <div>{{ dogecoin_address }}</div>
-    <label for="money">Money: {{ dogecoin }} Doge</label>
-    <button type="button" onclick="location.href='/wallet'">Refresh</button>
-
+    <label id="wallet_address">{{ dogecoin_address }}</label>
+    <button type="button2" onclick="myFunction()">Copy Wallet Address</button>
+    <div id="newmsg"></div>
+    <label for="money">Available Money: {{ dogecoin_available }} Doge</label>
+    <label for="money">Pending Money: {{ dogecoin_pending }} Doge</label>
+    <label>Username: {{ username }}</label>
+    <button type="button1" onclick="location.href='/wallet'">Refresh</button>
+    
+    <label>Refresh the page to see money changes</label></div>
+    
+    <div class="form-container" id="container2">
         <h1>Send Doge</h1>
         <form method="post">
             <div>
                 <label for="doge_quantity">Doge Quantity:</label>
-                <input type="text" id="doge_quantity" name="doge_quantity" required>
+                <input type="number" step="0.0001" id="doge_quantity" name="doge_quantity" required>
             </div>
             <div>
                 <label for="username">Wallet Address:</label>
                 <input type="text" id="wallet" name="wallet" required>
             </div>
-            
+            <input type="submit" name="submit_button" value="Calculate Fee">
             <input type="submit" name="submit_button" value="Send Doge">
+            
             <button type="button" onclick="location.href='/main'">Main Page</button>
         </form>
+        <label>{{ success_msg }}</label>
     </div>
-    <div>Refresh the page to see money changes</div>
-    <div>{{ success_msg }}</div>
+    
+    <script>
+        function unsecuredCopyToClipboard(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+  } catch (err) {
+    console.error('Unable to copy to clipboard', err);
+  }
+  document.body.removeChild(textArea);
+}
+        function myFunction() {
+  var Text = document.getElementById("wallet_address");
+  Text=Text.textContent
+  unsecuredCopyToClipboard(Text)
+  document.getElementById("newmsg").textContent="Succesfully copied!"
+    }
+    </script>
     
 </body>
 </html>

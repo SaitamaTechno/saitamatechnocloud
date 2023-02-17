@@ -6,6 +6,7 @@ import threading
 import qrcode
 import sql1
 import datetime
+import dogecoin_testnet as doge
 
 def get_date():
     date=datetime.datetime.now()
@@ -78,6 +79,9 @@ def login():
 def mainn():
     if 'username' in session:
         username = session['username']
+        wallet_info = doge.get_wallet_info(username)
+        wallet_address = wallet_info["address"]
+        wallet_balance = wallet_info["available_balance"]
         if request.method == 'POST':
             if request.form['submit_button'] == 'My Computers':
                 return redirect("/pc_table")
@@ -86,13 +90,15 @@ def mainn():
             elif request.form['submit_button'] == 'Log Out':
                 session.pop('username', None)
                 return redirect('/login')
-        return render_template('main.html', username=username, dogecoin_address="mywallet_address", dogecoin=100)
+        return render_template('main.html', username=username, dogecoin_address=wallet_address, dogecoin=wallet_balance)
     return redirect('/login')
 
 @app.route('/rent_pc', methods=['GET', 'POST'])
 def rent_pc():
     if 'username' in session:
         username = session['username']
+        wallet_info = doge.get_wallet_info(username)
+        available_balance = wallet_info["available_balance"]
         if request.method == 'POST':
             password = request.form['password']
             verify_password = request.form['verify_password']
@@ -108,14 +114,18 @@ def rent_pc():
                         if username != sql1.data_from_username_pc(username)[0][0]:
                             pass
                     except IndexError:
-                        sql1.create_pc(username, computer_name, int(disk_size), int(disk_size)*2, "active", get_date())
-                        threading.Thread(target=create_docker, args=(computer_name, password,)).start()
-                        return render_template('rent_pc.html', msg="Computer successfully created! Please check PC Table!")
+                        if int(disk_size)*2 < float(available_balance):
+                            threading.Thread(target=doge.send_money, args=(str(int(disk_size)*2), username, "default",)).start()
+                            sql1.create_pc(username, computer_name, int(disk_size), int(disk_size)*2, "active", get_date())
+                            threading.Thread(target=create_docker, args=(computer_name, password,)).start()
+                            return render_template('rent_pc.html', msg="Computer successfully created! Please check PC Table!", money=available_balance+" Doge")
+                        else:
+                            return render_template('rent_pc.html', msg="You don't have enough money!", money=available_balance+" Doge")
                     else:
-                        return render_template('rent_pc.html', msg="Each user can have only 1 computer!")
+                        return render_template('rent_pc.html', msg="Each user can have only 1 computer!", money=available_balance+" Doge")
                 else:
-                    return render_template('rent_pc.html', msg="This computer name is taken!")
-        return render_template("rent_pc.html")
+                    return render_template('rent_pc.html', msg="This computer name is taken!", money=available_balance+" Doge")
+        return render_template("rent_pc.html", money=available_balance+" Doge")
     return redirect("/login")
 @app.route('/pc_table', methods=['GET', 'POST'])
 def pc_table():
@@ -124,23 +134,27 @@ def pc_table():
         try:
             data=sql1.data_from_username_pc(username)[0]
             name=data[1]
-            portlist=[int(i) for i in data[2].replace("[", "").replace("]", "").split(", ")]
+            try:
+                portlist=[int(i) for i in data[2].replace("[", "").replace("]", "").split(", ")]
+            except AttributeError:
+                return render_template("pc_table.html", username=username, msg="Please wait a minute and Refresh the page. Your computer is still in progress!")
             sshport=portlist[0]
             portlist.pop(0)
             availableports=portlist
-            disk_size=data[3]
+            disk_size=str(data[3])
+            disk_size=docker.get_size_from_name(name)+"/"+disk_size
             doge=data[4]
             status=data[5]
             if request.method == 'POST':
                 button = request.form['submit_button']
                 if button == "Reboot":
                     threading.Thread(target=restart_docker, args=(name,)).start()
-                    return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+" GB", doge=str(doge)+" Doge", status=status, msg="Successfully Rebooted wait for a few minutes!")
+                    return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status, msg="Successfully Rebooted!")
                 elif button == "Delete":
                     sql1.delete_user_pc(name)
                     threading.Thread(target=delete_docker, args=(name,)).start()
-                    return render_template("pc_table.html", username=username, msg="Computer deleted! Wait for a few minutes!")
-            return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+" GB", doge=str(doge)+" Doge", status=status)
+                    return render_template("pc_table.html", username=username, msg="Computer deleted!")
+            return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status)
         except IndexError:
             return render_template("pc_table.html", username=username)
     return redirect('/login')
@@ -149,11 +163,26 @@ def pc_table():
 def wallet():
     if 'username' in session:
         username = session['username']
+        wallet_info = doge.get_wallet_info(username)
+        wallet_address = wallet_info["address"]
+        wallet_balance = wallet_info["available_balance"]
+        wallet_pending = wallet_info["pending_received_balance"]
         if request.method == 'POST':
             wallet = request.form['wallet']
-            doge_quantity = request.form['doge_quantity']
-            return render_template('wallet.html', username=username, dogecoin_address="mywallet_address", dogecoin=100, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username), success_msg="Transaction is successful!")
-        return render_template('wallet.html', username=username, dogecoin_address="mywallet_address", dogecoin=100, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username))
+            doge_quantity = float(request.form['doge_quantity'])
+            if doge_quantity < float(wallet_balance) and doge_quantity >= 0.03:
+                if request.form["submit_button"]=="Send Doge":
+                    threading.Thread(target=doge.send_money_to_address, args=(str(doge_quantity), username, wallet,)).start()
+                    #doge.send_money_to_address(str(doge_quantity), username, wallet)
+                    return render_template('wallet.html', username=username, dogecoin_address=wallet_address, dogecoin_available=wallet_balance, dogecoin_pending=wallet_pending, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username), success_msg="Transaction is successful!")
+                elif request.form["submit_button"]=="Calculate Fee":
+                    fee = doge.calculate_address_fee(str(doge_quantity), username, wallet)
+                    return render_template('wallet.html', username=username, dogecoin_address=wallet_address, dogecoin_available=wallet_balance, dogecoin_pending=wallet_pending, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username), success_msg="Transaction Fee is {} Doge".format(fee))
+            elif doge_quantity < float(wallet_balance) and doge_quantity <= 0.03:
+                return render_template('wallet.html', username=username, dogecoin_address=wallet_address, dogecoin_available=wallet_balance, dogecoin_pending=wallet_pending, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username), success_msg="Doge quantity cannot be less than 0.03")
+            else:
+                return render_template('wallet.html', username=username, dogecoin_address=wallet_address, dogecoin_available=wallet_balance, dogecoin_pending=wallet_pending, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username), success_msg="You don't have enough money!")
+        return render_template('wallet.html', username=username, dogecoin_address=wallet_address, dogecoin_available=wallet_balance, dogecoin_pending=wallet_pending, qrcode='''<div><img src="/static/QR/{}.png" alt="mywallet_address"></div>'''.format(username))
     return redirect('/login')
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -221,7 +250,9 @@ def verify(username):
         data = sql1.data_from_username(username)[0]
         if data[0] == username and data[3] == int(code):
             sql1.update_verified(username, 1)
-            make_qr("static/QR/{}.png".format(username), "mywallet")
+            doge.create_new_wallet(username)
+            wallet=doge.get_wallet_info(username)["address"]
+            make_qr("static/QR/{}.png".format(username), wallet)
             return render_template('verified.html')
         return "Invalid verification code"
     return render_template('verify.html', username=username)

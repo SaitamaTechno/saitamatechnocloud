@@ -10,6 +10,8 @@
     
     <h1>Computers Table</h1>
         <div>Username: {{ username }}</div>
+        <label>Warning: If you use your disk more than your disk size,</label>
+        <label>we delete your computer automatically!</label>
     <table>
       <tr>
         <th>Name</th>
@@ -43,6 +45,6 @@
     <button type="button" onclick="location.href='/main'">Main Page</button>
     </div>
     <label>SSH Access: ssh root@194.233.164.233 -p {{ sshport }}</label>
-    <div>{{ msg }}</div>
+    <label>{{ msg }}</label>
   </body>
 </html>

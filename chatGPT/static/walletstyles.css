@@ -6,8 +6,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 85vh;
-    flex-direction: column;
+    height: 80vh;
+    flex-direction: row;
 	background-color: black;
 	background-image: url("images/saitamatechno.png"); /* replace with the path to your image */
     /*background-size: cover;*/ /* scale the image to cover the entire background */
@@ -24,6 +24,7 @@ body, label {
 }
 h1{
     color: red;
+    background-color: black;
     font-size: 40px;
     font-weight: bold;
 }
@@ -32,8 +33,18 @@ label {
 	clear: both;	    /* added */
 	background-color: black;
 }
+div[id="newmsg"]{
+    background-color: black;
+}
+div[id="container2"]{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 15px;
+}
 /* set input field background color to yellow */
-input[type="text"], input[type="password"], input[type="email"] {
+input[type="text"], input[type="password"], input[type="email"],input[type="number"] {
     background-color: yellow;
     font-size: 25px;
 	color: blue;
@@ -53,10 +64,22 @@ input[type="submit"] {
     margin-top: 5px; /* added */
 	display: flex; /* added */
     justify-content: center;
-	float: left; /* added */
+	float: right; /* added */
 	clear: both;    
 }
 
+button[type="button1"] {
+	margin: 0 auto;
+    font-size: 25px; /* added */
+    background-color: pink; /* added */
+    color: blue; /* added */
+    padding: 10px; /* added */
+    margin-top: 5px; /* added */
+    display: flex; /* added */
+    justify-content: center;
+	float: left;
+    clear: both;
+}
 button[type="button"] {
 	margin: 0 auto;
     font-size: 25px; /* added */
@@ -67,6 +90,19 @@ button[type="button"] {
     display: flex; /* added */
     justify-content: center;
 	float: right;
+    clear: both;
+}
+button[type="button2"] {
+	margin: 0 auto;
+    font-size: 15px; /* added */
+    background-color: pink; /* added */
+    color: blue; /* added */
+    padding: 7px; /* added */
+    margin-bottom: 4px;
+    display: flex; /* added */
+    justify-content: center;
+	float: left;
+    clear: both;
 }
 
 /* add animation effect to button */
@@ -81,7 +117,16 @@ button[type="button"]:hover {
     background-color: yellow; /* change background color */
     transition: all 0.3s ease-in-out; /* add smooth transition */
 }
-
+button[type="button1"]:hover {
+    transform: scale(1.05); /* increase size by 5% */
+    background-color: yellow; /* change background color */
+    transition: all 0.3s ease-in-out; /* add smooth transition */
+}
+button[type="button2"]:hover {
+    transform: scale(1.05); /* increase size by 5% */
+    background-color: yellow; /* change background color */
+    transition: all 0.3s ease-in-out; /* add smooth transition */
+}
 button[type="tdbutton"] {
 	margin: 0 auto;
     font-size: 20px; /* added */

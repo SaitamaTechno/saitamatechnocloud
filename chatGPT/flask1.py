@@ -10,7 +10,7 @@ import dogecoin_testnet as doge
 
 def get_date():
     date=datetime.datetime.now()
-    mystr=str(date.year)+"/"+ str(date.month)+ "/" + str(date.day)
+    mystr=str(date.year)+"/"+ str(date.month)+ "/" + str(date.day)+ "/" + str(date.hour)
     return mystr
 
 def hide_email(email):
@@ -142,19 +142,25 @@ def pc_table():
             portlist.pop(0)
             availableports=portlist
             disk_size=str(data[3])
-            disk_size=docker.get_size_from_name(name)+"/"+disk_size
+            try:
+                disk_size=docker.get_size_from_name(name)+"/"+disk_size
+            except:
+                disk_size="-"+"/"+disk_size
             doge=data[4]
             status=data[5]
-            if request.method == 'POST':
-                button = request.form['submit_button']
-                if button == "Reboot":
-                    threading.Thread(target=restart_docker, args=(name,)).start()
-                    return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status, msg="Successfully Rebooted!")
-                elif button == "Delete":
-                    sql1.delete_user_pc(name)
-                    threading.Thread(target=delete_docker, args=(name,)).start()
-                    return render_template("pc_table.html", username=username, msg="Computer deleted!")
-            return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status)
+            if status=="passive":
+                return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status, msg="Passive computers means you don't have enough money in your wallet.")
+            else:
+                if request.method == 'POST':
+                    button = request.form['submit_button']
+                    if button == "Reboot":
+                        threading.Thread(target=restart_docker, args=(name,)).start()
+                        return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status, msg="Successfully Rebooted!")
+                    elif button == "Delete":
+                        sql1.delete_user_pc(name)
+                        threading.Thread(target=delete_docker, args=(name,)).start()
+                        return render_template("pc_table.html", username=username, msg="Computer deleted!")
+                return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status)
         except IndexError:
             return render_template("pc_table.html", username=username)
     return redirect('/login')

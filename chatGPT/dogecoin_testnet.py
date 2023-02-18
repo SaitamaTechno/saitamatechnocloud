@@ -45,5 +45,5 @@ def get_current_price():
 #create_new_wallet("enes")
 #info=get_wallet_info("default")
 #print(info["address"], info["available_balance"])
-#print(send_money("1", "default", "saitama"))
+#print(send_money("10", "default", "saitama1"))
 #print(calculate_money_fee("8", "default", "saitama"))

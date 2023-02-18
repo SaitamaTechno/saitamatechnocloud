@@ -23,9 +23,11 @@ def get_date():
 #data=sql1.data_from_username_pc("enes")[0]
 #portlist=[int(i) for i in data[2].replace("[", "").replace("]", "").split(", ")]
 #print(portlist)
-#print(sql1.data_from_username_pc("enes")[0])
-for i in sql1.get_data_pc():
-    print(i)
+#print(sql1.data_from_username_pc("saitama")[0])
+#print(sql1.data_from_computername_pc("enes")[0])
+#print(sql1.data_from_username("saitama")[0][1])
+#for i in sql1.get_data_pc():
+#    print(i)
 #print(len(sql1.get_usernames()))
 #if "enes" in [sql1.get_usernames()[i][i] for i in range(len(sql1.get_usernames())-1)]:
 #	print("okay")

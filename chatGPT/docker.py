@@ -1,5 +1,6 @@
 import subprocess
 import random
+import sql1
 
 def bash(command):
 	cmdlist = command.split(" ")
@@ -71,6 +72,10 @@ def con_run(name, command):
 	bash("docker exec -it {} {}".format(name, command))
 	return 1
 
+def con_stop(name):
+	bash("docker stop "+name)
+	return 1
+
 def con_restart(name):
 	bash("docker restart "+name)
 	con_run(name, "service ssh restart")
@@ -101,6 +106,8 @@ def printall():
 	        print(i)
 
 def create_root(name, password):
+	username=sql1.data_from_computername_pc(name)[0][0]
+	userpass=sql1.data_from_username(username)[0][1]
 	while 1:
 		a = random.randint(1024, 65535)
 		if a not in get_open_ports():
@@ -116,6 +123,8 @@ def create_root(name, password):
 	create_docker(name, "stc:latest", hostports, conports)
 	con_run(name, "expect /e1.expect {}".format(password))
 	con_run(name, "rm /e1.expect /stc1.sh")
+	con_run(name, "python3 /secret_maker.py {} {}".format(username, userpass))
+	con_run(name, "rm /secret_maker.py")
 	con_run(name, "service ssh restart")
 	return hostports
 

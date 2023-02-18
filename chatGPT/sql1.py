@@ -6,12 +6,30 @@ cur = con.cursor()
 #cur.execute("CREATE TABLE register (username, password, email, verification_code, verified)")
 #res = cur.execute("SELECT name FROM sqlite_master")
 #print(res.fetchall())
+def data_from_computername_pc(computer_name):
+	res = cur.execute(
+	'''
+	SELECT * FROM pc_table WHERE computer_name=?
+	''', (computer_name,))
+	return res.fetchall()
 def data_from_username_pc(username):
 	res = cur.execute(
 	'''
 	SELECT * FROM pc_table WHERE username=?
 	''', (username,))
 	return res.fetchall()
+def update_date(computer_name, date):
+	cur.execute(
+	'''
+	UPDATE pc_table SET date=? WHERE computer_name=?
+	''', [date, computer_name])
+	con.commit()
+def update_status(computer_name, status):
+	cur.execute(
+	'''
+	UPDATE pc_table SET status=? WHERE computer_name=?
+	''', [status, computer_name])
+	con.commit()
 def delete_user_pc(computer_name):
 	cur.execute(
 	'''

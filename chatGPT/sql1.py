@@ -5,6 +5,8 @@ cur = con.cursor()
 #cur.execute("CREATE TABLE pc_table (username, computer_name, hostports, disk_size, doge, status, date)")
 #cur.execute("CREATE TABLE register (username, password, email, verification_code, verified)")
 #res = cur.execute("SELECT name FROM sqlite_master")
+#cur.execute("DELETE FROM pc_table")
+#cur.execute("DELETE FROM register")
 #print(res.fetchall())
 def data_from_computername_pc(computer_name):
 	res = cur.execute(

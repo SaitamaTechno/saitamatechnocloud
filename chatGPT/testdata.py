@@ -25,7 +25,7 @@ def get_date():
 #print(portlist)
 #print(sql1.data_from_username_pc("saitama")[0])
 #print(sql1.data_from_computername_pc("enes")[0])
-#print(sql1.data_from_username("saitama")[0][1])
+#print(sql1.data_from_username("saitama")[0][2])
 #for i in sql1.get_data_pc():
 #    print(i)
 #print(len(sql1.get_usernames()))

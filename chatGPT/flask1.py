@@ -114,9 +114,9 @@ def rent_pc():
                         if username != sql1.data_from_username_pc(username)[0][0]:
                             pass
                     except IndexError:
-                        if int(disk_size)*2 < float(available_balance):
-                            threading.Thread(target=doge.send_money, args=(str(int(disk_size)*2), username, "default",)).start()
-                            sql1.create_pc(username, computer_name, int(disk_size), int(disk_size)*2, "active", get_date())
+                        if int(disk_size)*6 < float(available_balance):
+                            threading.Thread(target=doge.send_money, args=(str(int(disk_size)*6), username, "default",)).start()
+                            sql1.create_pc(username, computer_name, int(disk_size), int(disk_size)*6, "active", get_date())
                             threading.Thread(target=create_docker, args=(computer_name, password,)).start()
                             return render_template('rent_pc.html', msg="Computer successfully created! Please check PC Table!", money=available_balance+" Doge")
                         else:
@@ -149,7 +149,7 @@ def pc_table():
             doge=data[4]
             status=data[5]
             if status=="passive":
-                return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status, msg="Passive computers means you don't have enough money in your wallet.")
+                return render_template("pc_table.html", username=username, name=name, sshport=sshport, availableports=availableports, disk_size=str(disk_size)+"GB", doge=str(doge)+" Doge", status=status, msg="Passive computers means you don't have enough money in your wallet.\nAfter 2 days, if you still don't have money, we delete your computer!")
             else:
                 if request.method == 'POST':
                     button = request.form['submit_button']
@@ -201,13 +201,13 @@ def register():
             # code to return an error message if the passwords don't match
             return render_template('register.html', msg="Passwords do not match!")
             pass
-        #elif email in [sql1.get_emails()[i][0] for i in range(len(sql1.get_emails()))]:
-        #    return render_template('register.html', username_taken="This email has already registered!")
+        elif email in [sql1.get_emails()[i][0] for i in range(len(sql1.get_emails()))]:
+            return render_template('register.html', username_taken="This email has already registered!")
         else:
             # code to add the user to the database
             verification_code = random.randint(100000, 999999)
             # code to send an email with the verification code
-            if username not in [sql1.get_usernames()[i][0] for i in range(len(sql1.get_usernames()))]:
+            if username not in [sql1.get_usernames()[i][0] for i in range(len(sql1.get_usernames()))] and not "default":
                 sql1.create_user(username, password, email, verification_code, 0)
                 threading.Thread(target=sendmaill, args=(email, verification_code,)).start()
                 return redirect('/verify/' + username)

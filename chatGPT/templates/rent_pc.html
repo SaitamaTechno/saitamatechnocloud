@@ -27,11 +27,11 @@
             <div>
                 <label for="disk_size">Choose a disk size:</label><br>
                 <input type="radio" id="1gb" name="disk_size" value="1" required>
-                <label for="1gb">1GB (2 Doge/Monthly)</label><br>
+                <label for="1gb">1GB (6 Doge/Monthly)</label><br>
                 <input type="radio" id="2gb" name="disk_size" value="2" required>
-                <label for="2gb">2GB (4 Doge/Monthly)</label><br>
+                <label for="2gb">2GB (12 Doge/Monthly)</label><br>
                 <input type="radio" id="4gb" name="disk_size" value="4" required>
-                <label for="4gb">4GB (8 Doge/Monthly)</label><br><br>
+                <label for="4gb">4GB (24 Doge/Monthly)</label><br><br>
             </div>
             
             <input type="submit" name="submit" value="Pay">
@@ -46,17 +46,17 @@
             var transaction_fee;
             if (true==document.querySelector("#\\31 gb").checked)
             {
-            transaction_fee=0.02366
+            transaction_fee=0.06366
              document.getElementById("calculate_payment").textContent="Transaction Fee="+(transaction_fee).toString()+" Doge"
             }
             else if (true==document.querySelector("#\\32 gb").checked)
             {
-            transaction_fee=0.04366
+            transaction_fee=0.13146
             document.getElementById("calculate_payment").textContent="Transaction Fee="+(transaction_fee).toString()+" Doge"
             }
             else if (true==document.querySelector("#\\34 gb").checked)
             {
-            transaction_fee=0.08366
+            transaction_fee=0.25146
             document.getElementById("calculate_payment").textContent="Transaction Fee="+(transaction_fee).toString()+" Doge"
             }
             else {

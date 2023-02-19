@@ -3,7 +3,8 @@
 from block_io import BlockIo
 
 version = 2
-dogee = BlockIo('17ec-ba4d-9a1b-8226', 'bitemyass1907eatmyshit1907', version) #for dogeecoin
+dogee = BlockIo('f140-41e8-227c-a5c5', 'bitemyass1907eatmyshit1907', version) #for dogeecoin original
+#dogee = BlockIo('17ec-ba4d-9a1b-8226', 'bitemyass1907eatmyshit1907', version) #for dogeecoin testnet
 
 def create_new_wallet(name):
     dogee.get_new_address(label=name)
@@ -45,5 +46,5 @@ def get_current_price():
 #create_new_wallet("enes")
 #info=get_wallet_info("default")
 #print(info["address"], info["available_balance"])
-#print(send_money("10", "default", "saitama1"))
-#print(calculate_money_fee("8", "default", "saitama"))
+#print(send_money("20", "default", "saitama"))
+#print(calculate_money_fee("24", "default", "saitama"))

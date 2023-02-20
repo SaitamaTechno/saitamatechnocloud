@@ -2,12 +2,41 @@ import sqlite3
 con = sqlite3.connect("data/userdata.db", check_same_thread=False)
 cur = con.cursor()
 
+#cur.execute("CREATE TABLE key_table (key, number)")
 #cur.execute("CREATE TABLE pc_table (username, computer_name, hostports, disk_size, doge, status, date)")
 #cur.execute("CREATE TABLE register (username, password, email, verification_code, verified)")
 #res = cur.execute("SELECT name FROM sqlite_master")
 #cur.execute("DELETE FROM pc_table")
 #cur.execute("DELETE FROM register")
 #print(res.fetchall())
+def data_from_key(key):
+	res = cur.execute(
+	'''
+	SELECT * FROM key_table WHERE key=?
+	''', (key,))
+	try:
+		return res.fetchall()[0][1]
+	except IndexError:
+		return -1
+def data_all_key():
+	res = cur.execute(
+	'''
+	SELECT * FROM key_table
+	''')
+	return res.fetchall()
+def update_key(key, number):
+	cur.execute(
+	'''
+	UPDATE key_table SET number=? WHERE key=?
+	''', [number, key])
+	con.commit()
+def create_key(key, number):
+	cur.execute(
+	'''
+	INSERT INTO key_table (key, number)
+	VALUES (?,?)
+	''', [key, number])
+	con.commit()
 def data_from_computername_pc(computer_name):
 	res = cur.execute(
 	'''

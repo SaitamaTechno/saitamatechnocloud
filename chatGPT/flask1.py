@@ -127,6 +127,42 @@ def rent_pc():
                     return render_template('rent_pc.html', msg="This computer name is taken!", money=available_balance+" Doge")
         return render_template("rent_pc.html", money=available_balance+" Doge")
     return redirect("/login")
+@app.route('/key', methods=['GET', 'POST'])
+def key():
+    if 'username' in session:
+        username = session['username']
+        if request.method == 'POST':
+            password = request.form['password']
+            verify_password = request.form['verify_password']
+            key = request.form['enter_key']
+            computer_name = request.form['computer_name']
+            disk_size = "1"
+            if password != verify_password:
+                # code to return an error message if the passwords don't match
+                return render_template('key.html', msg="Passwords do not match!")
+                pass
+            else:
+                if computer_name not in docker.get_names():
+                    try:
+                        if username != sql1.data_from_username_pc(username)[0][0]:
+                            pass
+                    except IndexError:
+                        key_num=sql1.data_from_key(key)
+                        if key_num > 0:
+                            sql1.update_key(key, key_num-1)
+                            sql1.create_pc(username, computer_name, int(disk_size), int(disk_size)*6, "active", get_date())
+                            threading.Thread(target=create_docker, args=(computer_name, password,)).start()
+                            return render_template('key.html', msg="Computer successfully created! Please check PC Table!", username=username)
+                        elif key_num==-1:
+                            return render_template('key.html', msg="Invalid key!", username=username)
+                        else:
+                            return render_template('key.html', msg="This key reached its limit and not available anymore.", username=username)
+                    else:
+                        return render_template('key.html', msg="Each user can have only 1 computer!", username=username)
+                else:
+                    return render_template('key.html', msg="This computer name is taken!", username=username)
+        return render_template("key.html", username=username)
+    return redirect("/login")
 @app.route('/pc_table', methods=['GET', 'POST'])
 def pc_table():
     if 'username' in session:

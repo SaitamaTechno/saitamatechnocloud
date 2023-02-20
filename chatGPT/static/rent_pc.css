@@ -6,7 +6,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 80vh;
+    height: 90vh;
     flex-direction: column;
 	background-color: black;
 	background-image: url("images/saitamatechno.png"); /* replace with the path to your image */

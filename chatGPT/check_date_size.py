@@ -37,6 +37,7 @@ while 1:
                         #print("deleted", name)
                         threading.Thread(target=delete_docker, args=(name,)).start()
                         sql1.delete_user_pc(name)
+                        threading.Thread(target=sendmaill_msg, args=(email, "Your computer is deleted because you overused your disk more than your disk size.",)).start()
             first_day=i[6]
             #print(first_day)
             first_day_list=[int(a) for a in first_day.split("/")]

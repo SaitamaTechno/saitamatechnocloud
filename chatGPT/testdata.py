@@ -36,6 +36,6 @@ def get_date():
 #sql1.create_key("LINKEDIN2", 2)
 #sql1.update_key("SAITAMATECHNO5", 5)
 #sql1.update_key("LINKEDIN2", 2)
-
+#sql1.create_key("ENESTELLI", 5)
 print(sql1.data_all_key())
 #print(sql1.data_from_key("SAITAMATECHNO5"))

@@ -51,6 +51,7 @@ def delete_docker(name):
     docker.delete_docker(name)
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
 app.secret_key = 'peaceful_world'
 
 @app.route('/')
@@ -59,6 +60,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    actives=len(sql1.get_data())
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -73,7 +75,7 @@ def login():
                 return render_template('login.html', log_msg="Your account is not verified. Click the button below and verify!", verifybutton='''<button type="button" onclick="location.href='/verify/{}'">Verify</button>'''.format(username))
             else:
                 return render_template('login.html', log_msg="Username and password does not match!", verifybutton='''<button type="button" onclick="location.href='/change_pass_email/{}'">Forgot Your Password?</button>'''.format(username))
-    return render_template('login.html')
+    return render_template('login.html', log_msg="Active Users: {}".format(actives))
 
 @app.route('/main', methods=['GET', 'POST'])
 def mainn():
@@ -243,7 +245,7 @@ def register():
             # code to add the user to the database
             verification_code = random.randint(100000, 999999)
             # code to send an email with the verification code
-            if username not in [sql1.get_usernames()[i][0] for i in range(len(sql1.get_usernames()))] and not "default":
+            if username not in [sql1.get_usernames()[i][0] for i in range(len(sql1.get_usernames()))] and username != "default":
                 sql1.create_user(username, password, email, verification_code, 0)
                 threading.Thread(target=sendmaill, args=(email, verification_code,)).start()
                 return redirect('/verify/' + username)
@@ -300,4 +302,4 @@ def verify(username):
     return render_template('verify.html', username=username)
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=80)
+    app.run(debug=True, host="0.0.0.0", port=801)

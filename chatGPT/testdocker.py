@@ -16,7 +16,7 @@ import docker
 #docker.con_restart("saitama1")
 #docker.printall()
 #print(docker.get_open_ports())
-#docker.restart_all()
+docker.restart_all()
 #print(docker.create_root("vegeta", "123"))
 #docker.con_stop("enes")
 

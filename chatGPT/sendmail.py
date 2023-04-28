@@ -2,8 +2,8 @@ from redmail import outlook
 import time
 
 def sendmaill(email, code):
-	outlook.username = "saitamatechnobot@outlook.com"
-	outlook.password = "aGzansicim.7274"
+	outlook.username = "OUTLOOK_MAIL"
+	outlook.password = "OUTLOOK_PASSWORD"
 
 	outlook.send(
 	    receivers=[email],

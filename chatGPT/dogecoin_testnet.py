@@ -3,8 +3,8 @@
 from block_io import BlockIo
 
 version = 2
-dogee = BlockIo('f140-41e8-227c-a5c5', 'bitemyass1907eatmyshit1907', version) #for dogeecoin original
-#dogee = BlockIo('17ec-ba4d-9a1b-8226', 'bitemyass1907eatmyshit1907', version) #for dogeecoin testnet
+dogee = BlockIo('YOUR_API_TOKEN', 'PASSWORD', version) #for dogeecoin original
+#dogee = BlockIo('YOUR_API_TOKEN', 'PASSWORD', version) #for dogeecoin testnet
 
 def create_new_wallet(name):
     dogee.get_new_address(label=name)

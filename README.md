@@ -3,3 +3,4 @@
 <div>A dockerized cloud service.</div>
 <div> - Dogecoin payment system</div>
 <div> - Docker technology</div>
+<div> - Python: Flask, sqlite3, smtplib, qr, block.io</div>

@@ -1,3 +1,5 @@
+# Created by chatGPT
+
 from flask import Flask, render_template, request, redirect
 import smtplib
 import random

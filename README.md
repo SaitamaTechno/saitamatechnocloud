@@ -7,6 +7,7 @@
 <div> - Dogecoin payment system using block.io</div>
 <div> - Docker technology</div>
 <div> - Python: Flask, sqlite3, smtplib, qr, block.io</div>
+<div> - ChatGPT (All css belongs to chatGPT and also some of the code)</div>
 <div>.</div>
 <div>.</div>
 <div>Run flask1.py and for the monthly payment run check_date_size.py</div>

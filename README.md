@@ -16,4 +16,4 @@
 <div>It can be used 100 times.</div>
 <div>.</div>
 <div>.</div>
-<div>saitamatechno.com will be shutdown in 06.31.2023</div>
+<div>saitamatechno.com will be shutdown in 31.05.2023</div>

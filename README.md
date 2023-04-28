@@ -12,3 +12,8 @@
 <div>.</div>
 <div>Run flask1.py and for the monthly payment run check_date_size.py</div>
 <a href="https://www.youtube.com/watch?v=wrr9EloRCpQ" target="_blank">How to use Saitama Techno Cloud?</a>
+<div>Get your free key here SAITAMATECHNO100</div>
+<div>It can be used 100 times.</div>
+<div>.</div>
+<div>.</div>
+<div>saitamatechno.com will be shutdown in 06.31.2023</div>

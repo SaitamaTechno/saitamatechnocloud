@@ -1,5 +1,5 @@
 # Saitama Techno Cloud
-<a href="https://saitamatechno.com">Visit saitamatechno.com</a>
+<a href="https://saitamatechno.com">saitamatechno.com</a>
 <div>A dockerized cloud service.</div>
 <div> - Dogecoin payment system using block.io</div>
 <div> - Docker technology</div>

@@ -11,3 +11,4 @@
 <div>.</div>
 <div>.</div>
 <div>Run flask1.py and for the monthly payment run check_date_size.py</div>
+<a href="https://www.youtube.com/watch?v=wrr9EloRCpQ">How to use Saitama Techno Cloud?</a>

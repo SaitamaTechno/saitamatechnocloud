@@ -156,4 +156,3 @@ def delete_column(col_name):
 #res = cur.execute("SELECT username FROM register")
 #print(res.fetchall())
 con.commit()
-#create_user("enes", "asdas32", "asdsad€mail.com", 123456, 0)

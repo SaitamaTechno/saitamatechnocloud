@@ -1,3 +1,5 @@
+# Makes monthly payments and checks each computer's size.
+
 import sql1
 import docker
 import threading
